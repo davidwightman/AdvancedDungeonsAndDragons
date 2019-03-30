@@ -23,11 +23,11 @@ new Vue({
         startGame: function(event){
             console.log(event)
             this.playingGame = !this.playingGame;
-            if (event === 'paladin') {
-                this.characterClass = 'paladin'
+            if (event === 'Paladin') {
+                this.characterClass = 'Paladin'
                 this.characterImage = 'paladin.jpg'
             } else {
-                this.characterClass = 'warrior'
+                this.characterClass = 'Warrior'
                 this.characterImage = 'warrior.jpg'
             }
             let monsterSelector = getRandomInt(3)
@@ -59,7 +59,7 @@ new Vue({
         },
         specialAttack: function(event){
             let youInjured;
-            if (this.characterClass === 'warrior') {
+            if (this.characterClass === 'Warrior') {
                 youInjured = getRandomInt(20);
             } else youInjured= getRandomInt(10);
             let monsterInjured = getRandomInt(40);
@@ -72,7 +72,7 @@ new Vue({
         },
         heal: function(event){
             let healed;
-            if (this.characterClass === 'paladin') {
+            if (this.characterClass === 'Paladin') {
             healed = getRandomInt(40);
             } else healed = getRandomInt(20);
             this.you = this.you + healed;
