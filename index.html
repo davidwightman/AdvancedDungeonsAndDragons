@@ -11,10 +11,10 @@
     <section class="row">
         <div class="small-6 columns">
             <h1 class="text-center">YOU</h1>
-            <!-- <img v-bind:src="'./assets/' + {{characterClass}} + '.jpg'"/> -->
-            <img v-bind:src="'./assets/' + characterImage"/>
-            <!-- v-bind:src="'/media/avatars/' + joke.avatar" -->
-            <div class="healthbar">
+            <div class="imageContainer">
+                <img class="image" v-if="characterImage !== ''" v-bind:src="'./assets/player/' + characterImage"/>
+            </div>
+            <div v-if="characterImage !== ''" class="healthbar">
                 <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;"
                 :style="{ width: you + '%' }">
                     {{ you }}
@@ -22,11 +22,15 @@
             </div>
         </div>
         <div class="small-6 columns">
-            <h1 class="text-center">MONSTER</h1>
-            <div class="healthbar">
+            <h1 v-if="monsterType === ''" class="text-center">Monster</h1>
+            <h1 v-else class="text-center">{{monsterType}}</h1>
+            <div class="imageContainer">
+                <img class="image" v-if="monsterImage !== ''" v-bind:src="'./assets/monster/' + monsterImage"/>
+            </div>
+            <div v-if="monsterType !== ''" class="healthbar">
                 <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;"
-                :style="{ width: monster + '%' }">
-                    {{ monster }}
+                :style="{ width: monsterHitPoints / monsterDivideHitPoints + '%' }">
+                    {{ monsterHitPoints }}
                 </div>
             </div>
         </div>

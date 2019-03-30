@@ -92,3 +92,17 @@ button {
 #give-up:hover {
     background-color: #c7c7c7;
 }
+
+.imageContainer {
+    height: 200px;
+    margin: 20px;
+    text-align: center;
+}
+
+/* resize images */
+.image {
+    width: auto;
+    height: 100%;
+   
+    display: inline-block;
+}

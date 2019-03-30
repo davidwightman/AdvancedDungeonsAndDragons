@@ -5,12 +5,19 @@ function getRandomInt(max) {
 new Vue({
     el: '#app',
     data: {
+        monsterTypes: [
+            {name: 'Orc', image: 'orc.jpg', hitPoints: 50, divideBy: .5},
+            {name: 'Troll', image: 'troll.jpg', hitPoints:200, divideBy: 2},
+            {name: 'Eye Of The Beholder', image: 'eyeOfTheBeholder.jpg', hitPoints: 25, divideBy: .25}],
         playingGame: false,
         you: 100,
-        monster: 100,
+        monsterHitPoints: undefined,
         battle: [],
         characterClass: '',
-        characterImage: ''
+        characterImage: '',
+        monsterImage: '',
+        monsterType: '',
+        monsterDivideHitPoints: '',
     },
     methods: {
         startGame: function(event){
@@ -23,22 +30,31 @@ new Vue({
                 this.characterClass = 'warrior'
                 this.characterImage = 'warrior.jpg'
             }
+            let monsterSelector = getRandomInt(3)
+            this.monsterType = this.monsterTypes[monsterSelector].name
+            this.monsterImage = this.monsterTypes[monsterSelector].image
+            this.monsterHitPoints = this.monsterTypes[monsterSelector].hitPoints
+            this.monsterDivideHitPoints = this.monsterTypes[monsterSelector].divideBy
         },
         giveUp: function(event){
             this.you = 100;
-            this.monster = 100;
+            this.monsterHitPoints = undefined;
             this.battle = []
             this.playingGame = !this.playingGame;
+            this.characterClass= ''
+            this.characterImage= ''
+            this.monsterImage= ''
+            this.monsterType=''
         },
         attack: function(event){
            
             let youInjured = getRandomInt(10);
             let monsterInjured = getRandomInt(20);
             this.you = this.you - youInjured;
-            this.monster = this.monster - monsterInjured;
+            this.monsterHitPoints = this.monsterHitPoints - monsterInjured;
             this.battle.push({
-                monster: `Player hits monster for ${monsterInjured} hit points of damage.`, 
-                you: `Monster hits player for ${youInjured} hit points of damage.`
+                monster: `${this.characterClass} hits ${this.monsterType} for ${monsterInjured} hit points of damage.`, 
+                you: `${this.monsterType} hits ${this.characterClass} for ${youInjured} hit points of damage.`
             })
         },
         specialAttack: function(event){
@@ -48,10 +64,10 @@ new Vue({
             } else youInjured= getRandomInt(10);
             let monsterInjured = getRandomInt(40);
             this.you = this.you - youInjured;
-            this.monster = this.monster - monsterInjured;
+            this.monsterHitPoints = this.monsterHitPoints - monsterInjured;
             this.battle.push({
-                monster: `Player hits monster for ${monsterInjured} hit points of damage.`, 
-                you: `Monster hits player for ${youInjured} hit points of damage.`
+                monster: `${this.characterClass} hits ${this.monsterType} for ${monsterInjured} hit points of damage.`, 
+                you: `${this.monsterType} hits ${this.characterClass} for ${youInjured} hit points of damage.`
             })
         },
         heal: function(event){
@@ -68,13 +84,13 @@ new Vue({
     },
     watch: {
         you: function(){
-            if (this.you <= 0){
+            if (this.you < 1){
                 alert('the monster defeated you')
                 this.giveup()
             }
         },
-        monster: function(){
-            if (this.monster <= 0){
+        monsterHitPoints: function(){
+            if (this.monsterHitPoints < 1){
                 alert('you win! you beat the monster')
                 this.giveUp()
             }
