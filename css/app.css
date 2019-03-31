@@ -94,7 +94,7 @@ button {
 }
 
 .imageContainer {
-    height: 200px;
+    height: 300px;
     margin: 20px;
     text-align: center;
 }
@@ -103,6 +103,11 @@ button {
 .image {
     width: auto;
     height: 100%;
-   
     display: inline-block;
+    border: 40px solid black;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    background-color: black;
+    text-align: center;
+    color: white;
 }
