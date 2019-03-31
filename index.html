@@ -12,7 +12,7 @@
         <div class="small-6 columns">
             <h1 v-if="characterClass !== ''" class="text-center">{{characterClass}}</h1>
             <div class="imageContainer">
-                <img class="image" v-if="characterImage !== ''" v-bind:src="'./assets/player/' + characterImage"/>
+                <img class="image" v-if="characterImage !== ''" v-bind:src="'./assets/player/' + characterImage" :alt="characterClass"/>
             </div>
             <div v-if="characterImage !== ''" class="healthbar">
                 <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;"
@@ -24,7 +24,7 @@
         <div class="small-6 columns">
             <h1 class="text-center">{{monsterType}}</h1>
             <div class="imageContainer">
-                <img class="image" v-if="monsterImage !== ''" v-bind:src="'./assets/monster/' + monsterImage"/>
+                <img class="image" v-if="monsterImage !== ''" v-bind:src="'./assets/monster/' + monsterImage" :alt="monsterType"/>
             </div>
             <div v-if="monsterType !== ''" class="healthbar">
                 <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;"
