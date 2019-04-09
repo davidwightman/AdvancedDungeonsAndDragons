@@ -10,7 +10,7 @@
 <div id="app">
     <section class="row">
         <div class="small-6 columns">
-            <h1 v-if="characterClass !== ''" class="text-center">{{characterClass}}</h1>
+            <h1 v-if="characterClass !== ''" class="text-center controls">{{characterClass}}</h1>
             <div class="imageContainer">
                 <img class="image" v-if="characterImage !== ''" v-bind:src="'./assets/player/' + characterImage" :alt="characterClass"/>
             </div>
@@ -22,7 +22,7 @@
             </div>
         </div>
         <div class="small-6 columns">
-            <h1 class="text-center">{{monsterType}}</h1>
+            <h1 v-if="monsterType !== ''" class="text-center controls">{{monsterType}}</h1>
             <div class="imageContainer">
                 <img class="image" v-if="monsterImage !== ''" v-bind:src="'./assets/monster/' + monsterImage" :alt="monsterType"/>
             </div>

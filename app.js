@@ -47,14 +47,17 @@ new Vue({
             this.monsterType=''
         },
         attack: function(event){
-           
+            let message = {}
             let youInjured = getRandomInt(10);
             let monsterInjured = getRandomInt(20);
             this.you = this.you - youInjured;
             this.monsterHitPoints = this.monsterHitPoints - monsterInjured;
+            message.monster = monsterInjured !== 0 ?  `${this.characterClass} hits ${this.monsterType} for ${monsterInjured} hit points of damage.` :
+            `${this.characterClass} completely misses ${this.monsterType}! Sorry, no damage inflicted this round.`
+            message.you = youInjured !== 0 ? `${this.monsterType} hits ${this.characterClass} for ${youInjured} hit points of damage.` : `Whew! ${this.monsterType} completely misses ${this.characterClass}! Luckily no damage inflicted this round.`
             this.battle.push({
-                monster: `${this.characterClass} hits ${this.monsterType} for ${monsterInjured} hit points of damage.`, 
-                you: `${this.monsterType} hits ${this.characterClass} for ${youInjured} hit points of damage.`
+                monster: message.monster, 
+                you: message.you
             })
         },
         specialAttack: function(event){
@@ -72,13 +75,22 @@ new Vue({
         },
         heal: function(event){
             let healed;
+            let healMessage;
             if (this.characterClass === 'Paladin') {
-            healed = getRandomInt(40);
+                healed = getRandomInt(40);
             } else healed = getRandomInt(20);
-            this.you = this.you + healed;
+            // prevent player from healing themself above 100 hitpoints
+            if (healed === 0) {
+                healMessage = `Healing completely failed!`
+            } else if (this.you + healed < 100 && this.you + healed >= 1) {
+                healMessage = `You heal yourself for ${healed} hit points.`
+            } else if (this.you + healed >= 100) {
+                healMessage = `You are at perfect health!`
+            }
+            this.you = this.you + healed < 100 ? this.you + healed : 100;
             this.battle.push({
                 monster: ``, 
-                you: `You heal yourself for ${healed} hit points.`
+                you: healMessage
             })
         }
     },
