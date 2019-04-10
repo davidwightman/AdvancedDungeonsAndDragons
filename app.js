@@ -40,7 +40,7 @@ new Vue({
             this.monsterDivideHitPoints = this.monsterTypes[monsterSelector].divideBy
         },
         giveUp: function(event){
-            this.giveUp = false;
+            this.gameOver = false;
             this.alert = false;
             this.you = 100;
             this.monsterHitPoints = undefined;
