@@ -14,7 +14,7 @@
             <div class="imageContainer">
                 <img class="image" v-if="characterImage !== ''" v-bind:src="'./assets/player/' + characterImage" :alt="characterClass"/>
             </div>
-            <div v-if="characterImage !== ''" class="healthbar">
+            <div v-if="characterImage !== ''" class="healthbar" :style="{backgroundColor: backgroundColor1}">
                 <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;"
                 :style="{ width: you + '%' }">
                     {{ you }}
@@ -26,7 +26,7 @@
             <div class="imageContainer">
                 <img class="image" v-if="monsterImage !== ''" v-bind:src="'./assets/monster/' + monsterImage" :alt="monsterType"/>
             </div>
-            <div v-if="monsterType !== ''" class="healthbar">
+            <div v-if="monsterType !== ''" class="healthbar" style="background-color: #eee;">
                 <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;"
                 :style="{ width: monsterHitPoints / monsterDivideHitPoints + '%' }">
                     {{ monsterHitPoints }}
@@ -51,6 +51,21 @@
             <button id="give-up" @click="giveUp">GIVE UP</button>
         </div>
     </section>
+
+    <section class="row controls" v-if="gameOver">
+        <div>
+            Sorry, you lose. Play again?
+            <button @click="giveUp">Yes!</button>
+        </div>
+    </section>
+
+    <section class="row controls" v-if="alert">
+            <div>
+                You Win! Would you like to battle another monster?
+                <button @click="giveUp">Yes!</button>
+            </div>
+        </section>
+
     <section class="row log" v-if="battle.length">
         <div class="small-12 columns">
             <ul >

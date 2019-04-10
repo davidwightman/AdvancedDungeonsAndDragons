@@ -18,6 +18,9 @@ new Vue({
         monsterImage: '',
         monsterType: '',
         monsterDivideHitPoints: '',
+        backgroundColor1: '#eee',
+        gameOver: false,
+        alert: false
     },
     methods: {
         startGame: function(event){
@@ -37,6 +40,8 @@ new Vue({
             this.monsterDivideHitPoints = this.monsterTypes[monsterSelector].divideBy
         },
         giveUp: function(event){
+            this.giveUp = false;
+            this.alert = false;
             this.you = 100;
             this.monsterHitPoints = undefined;
             this.battle = []
@@ -59,6 +64,12 @@ new Vue({
                 monster: message.monster, 
                 you: message.you
             })
+            // if (youInjured !== 0){
+            //     setTimeout(()=>{
+            //         this.backgroundColor1 = 'red'
+            //       }, 250)
+            //     }
+            // }
         },
         specialAttack: function(event){
             let youInjured;
@@ -97,14 +108,14 @@ new Vue({
     watch: {
         you: function(){
             if (this.you < 1){
-                alert('the monster defeated you')
-                this.giveup()
+                this.you = 0
+                this.gameOver = true
             }
         },
         monsterHitPoints: function(){
             if (this.monsterHitPoints < 1){
-                alert('you win! you beat the monster')
-                this.giveUp()
+                this.monsterHitPoints = 0
+                this.alert = true
             }
         }
     }
