@@ -20,7 +20,8 @@ new Vue({
         monsterDivideHitPoints: '',
         backgroundColor1: '#eee',
         gameOver: false,
-        alert: false
+        alert: false,
+        points: 0
     },
     methods: {
         startGame: function(event){
@@ -64,6 +65,7 @@ new Vue({
                 monster: message.monster, 
                 you: message.you
             })
+            this.points = this.points + (monsterInjured * 10)
             // if (youInjured !== 0){
             //     setTimeout(()=>{
             //         this.backgroundColor1 = 'red'

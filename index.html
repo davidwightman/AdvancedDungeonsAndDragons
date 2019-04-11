@@ -8,6 +8,11 @@
 </head>
 <body>
 <div id="app">
+        <section class="row controls" v-if="characterClass !== ''">
+                <div class="small-12 columns">
+                   {{characterClass}} Points: {{ points}}
+                </div>
+            </section>
     <section class="row">
         <div class="small-6 columns">
             <h1 v-if="characterClass !== ''" class="text-center controls">{{characterClass}}</h1>
@@ -55,14 +60,14 @@
     <section class="row controls" v-if="gameOver">
         <div>
             Sorry, you lose. Play again?
-            <button @click="giveUp">Yes!</button>
+            <button v-on:click="giveUp">Yes!</button>
         </div>
     </section>
 
     <section class="row controls" v-if="alert">
             <div>
                 You Win! Would you like to battle another monster?
-                <button @click="giveUp">Yes!</button>
+                <button v-on:click="giveUp">Yes!</button>
             </div>
         </section>
 
