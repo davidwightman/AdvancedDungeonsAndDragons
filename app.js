@@ -126,7 +126,10 @@ new Vue({
                 monster: ``, 
                 you: healMessage
             })
-        }
+        },
+        flashHitPoints: function (event) {
+            this.;
+          }
     },
     watch: {
         you: function(){
@@ -141,6 +144,11 @@ new Vue({
                 this.alert = true
             }
         }
-    }
+    },
+    computed: {
+        computedBackgroundColor: function () {
+          return this.width;
+        }
+      },
 
 })
