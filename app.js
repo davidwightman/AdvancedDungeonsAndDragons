@@ -51,8 +51,28 @@ new Vue({
             this.characterImage= ''
             this.monsterImage= ''
             this.monsterType=''
+            this.points = 0
+        },
+        playAgain: function () {
+            this.gameOver = false;
+            this.alert = false;
+            this.monsterHitPoints = undefined;
+            this.battle = []
+            this.playingGame = true;
+            let monsterSelector = getRandomInt(3)
+            this.monsterType = this.monsterTypes[monsterSelector].name
+            this.monsterImage = this.monsterTypes[monsterSelector].image
+            this.monsterHitPoints = this.monsterTypes[monsterSelector].hitPoints
+            this.monsterDivideHitPoints = this.monsterTypes[monsterSelector].divideBy
         },
         attack: function(event){
+            if (this.monsterHitPoints === 0) {
+                this.battle.push({
+                    monster: ``, 
+                    you: "You've already defeated the monster!"
+                })
+                return
+            }
             let message = {}
             let youInjured = getRandomInt(10);
             let monsterInjured = getRandomInt(20);
@@ -66,14 +86,15 @@ new Vue({
                 you: message.you
             })
             this.points = this.points + (monsterInjured * 10)
-            // if (youInjured !== 0){
-            //     setTimeout(()=>{
-            //         this.backgroundColor1 = 'red'
-            //       }, 250)
-            //     }
-            // }
         },
         specialAttack: function(event){
+            if (this.monsterHitPoints === 0) {
+                this.battle.push({
+                    monster: ``, 
+                    you: "You've already defeated the monster!"
+                })
+                return
+            }
             let youInjured;
             if (this.characterClass === 'Warrior') {
                 youInjured = getRandomInt(20);

@@ -67,7 +67,8 @@
     <section class="row controls" v-if="alert">
             <div>
                 You Win! Would you like to battle another monster?
-                <button v-on:click="giveUp">Yes!</button>
+                <button v-on:click="playAgain">Yes!</button>
+                <button v-on:click="giveUp">No thank you</button>
             </div>
         </section>
 
