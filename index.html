@@ -19,7 +19,7 @@
             <div class="imageContainer">
                 <img class="image" v-if="characterImage !== ''" v-bind:src="'./assets/player/' + characterImage" :alt="characterClass"/>
             </div>
-            <div v-if="characterImage !== ''" class="healthbar" :style="{backgroundColor: backgroundColor1}">
+            <div v-if="characterImage !== ''" class="healthbar" >
                 <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;"
                 :style="{ width: you + '%' }">
                     {{ you }}
@@ -32,8 +32,8 @@
                 <img class="image" v-if="monsterImage !== ''" v-bind:src="'./assets/monster/' + monsterImage" :alt="monsterType"/>
             </div>
             <div v-if="monsterType !== ''" class="healthbar" style="background-color: #eee;">
-                <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;"
-                :style="{ width: monsterHitPoints / monsterDivideHitPoints + '%', backgroundColor: computedbackgroundColor }">
+                <div class="healthbar text-center" 
+                :style="{ width: monsterHitPoints / monsterDivideHitPoints + '%', backgroundColor: computedBackgroundColor, margin: 0, color: 'white' }">
                     {{ monsterHitPoints }}
                 </div>
             </div>

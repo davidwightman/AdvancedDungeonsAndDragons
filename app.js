@@ -18,7 +18,7 @@ new Vue({
         monsterImage: '',
         monsterType: '',
         monsterDivideHitPoints: '',
-        backgroundColor1: '#eee',
+        monsterBackgroundColor: 'green', //'#eee',
         gameOver: false,
         alert: false,
         points: 0
@@ -86,6 +86,7 @@ new Vue({
                 you: message.you
             })
             this.points = this.points + (monsterInjured * 10)
+            this.flashHitPoints()
         },
         specialAttack: function(event){
             if (this.monsterHitPoints === 0) {
@@ -127,8 +128,11 @@ new Vue({
                 you: healMessage
             })
         },
-        flashHitPoints: function (event) {
-            this.;
+        flashHitPoints: function () {
+            this.monsterBackgroundColor = 'red'
+            let vm = this
+            setTimeout(vm.monsterBackgroundColor = 'green', 2000)
+            //this.monsterBackgroundColor = 'green'
           }
     },
     watch: {
@@ -147,7 +151,7 @@ new Vue({
     },
     computed: {
         computedBackgroundColor: function () {
-          return this.width;
+          return this.monsterBackgroundColor;
         }
       },
 
