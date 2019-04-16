@@ -8,7 +8,10 @@ new Vue({
         monsterTypes: [
             {name: 'Orc', image: 'orc.jpg', hitPoints: 50, divideBy: .5},
             {name: 'Troll', image: 'troll.jpg', hitPoints:200, divideBy: 2},
-            {name: 'Eye Of The Beholder', image: 'eyeOfTheBeholder.jpg', hitPoints: 25, divideBy: .25}],
+            {name: 'Eye Of The Beholder', image: 'eyeOfTheBeholder.jpg', hitPoints: 25, divideBy: .25},
+            {name: 'Mindflayer', image: 'mindflayer.jpg', hitPoints: 25, divideBy: .25},
+            {name: 'Black Dragon', image: 'blackDragon.jpg', hitPoints: 100, divideBy: 1},
+            {name: 'Platinum Dragon', image: 'platinumDragon.jpg', hitPoints: 400, divideBy: 4}],
         playingGame: false,
         you: 100,
         monsterHitPoints: undefined,
@@ -25,7 +28,6 @@ new Vue({
     },
     methods: {
         startGame: function(event){
-            console.log(event)
             this.playingGame = !this.playingGame;
             if (event === 'Paladin') {
                 this.characterClass = 'Paladin'
@@ -34,7 +36,7 @@ new Vue({
                 this.characterClass = 'Warrior'
                 this.characterImage = 'warrior.jpg'
             }
-            let monsterSelector = getRandomInt(3)
+            let monsterSelector = getRandomInt(6)
             this.monsterType = this.monsterTypes[monsterSelector].name
             this.monsterImage = this.monsterTypes[monsterSelector].image
             this.monsterHitPoints = this.monsterTypes[monsterSelector].hitPoints
@@ -60,7 +62,7 @@ new Vue({
             this.monsterHitPoints = undefined;
             this.battle = []
             this.playingGame = true;
-            let monsterSelector = getRandomInt(3)
+            let monsterSelector = getRandomInt(6)
             this.monsterType = this.monsterTypes[monsterSelector].name
             this.monsterImage = this.monsterTypes[monsterSelector].image
             this.monsterHitPoints = this.monsterTypes[monsterSelector].hitPoints
@@ -80,10 +82,15 @@ new Vue({
                 youInjured = getRandomInt(10);
             } else if (this.monsterType === 'Troll') {
                 youInjured = getRandomInt(20);
+            } else if (this.monsterType === 'Black Dragon') {
+                youInjured = getRandomInt(30);
+            } else if (this.monsterType === 'Platinum Dragon') {
+                youInjured = getRandomInt(50);
+            } else if (this.monsterType === 'MindFlayer') {
+                youInjured = getRandomInt(60);
             } else {
                 youInjured = getRandomInt(50);
             }
-            
             let monsterInjured = getRandomInt(20);
             this.you = this.you - youInjured;
             this.monsterHitPoints = this.monsterHitPoints - monsterInjured;
@@ -106,10 +113,26 @@ new Vue({
                 return
             }
             let youInjured;
-            if (this.characterClass === 'Warrior') {
+            let monsterInjured
+
+            if (this.monsterType === 'Orc'){
+                youInjured = getRandomInt(10);
+            } else if (this.monsterType === 'Troll') {
                 youInjured = getRandomInt(20);
-            } else youInjured= getRandomInt(10);
-            let monsterInjured = getRandomInt(40);
+            } else if (this.monsterType === 'Black Dragon') {
+                youInjured = getRandomInt(30);
+            } else if (this.monsterType === 'Platinum Dragon') {
+                youInjured = getRandomInt(50);
+            } else if (this.monsterType === 'MindFlayer') {
+                youInjured = getRandomInt(60);
+            } else {
+                youInjured = getRandomInt(50);
+            }
+            
+            if (this.characterClass === 'Warrior') {
+                monsterInjured = getRandomInt(50);
+            } else monsterInjured = getRandomInt(30);
+
             this.you = this.you - youInjured;
             this.monsterHitPoints = this.monsterHitPoints - monsterInjured;
             this.battle.push({
@@ -153,16 +176,13 @@ new Vue({
             if (this.you < 1){
                 this.you = 0
                 this.gameOver = true
-
-               
             }
         },
         monsterHitPoints: function(){
             if (this.monsterHitPoints < 1){
                 this.monsterHitPoints = 0
                 this.alert = true
-                this.gameOver = true
-                
+                this.gameOver = true  
             }
         }
     },
