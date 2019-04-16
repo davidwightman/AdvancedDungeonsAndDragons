@@ -48,7 +48,7 @@
         </div>
     </section>
     
-    <section class="row controls" v-else>
+    <section class="row controls" v-if="playingGame && !gameOver">
         <div class="small-12 columns">
             <button id="attack" @click="attack">ATTACK</button>
             <button id="special-attack" @click="specialAttack">SPECIAL ATTACK</button>
@@ -57,14 +57,14 @@
         </div>
     </section>
 
-    <section class="row controls" v-if="gameOver">
+    <section class="row controls" v-if="gameOver && you <= 0">
         <div>
             Sorry, you lose. Play again?
             <button v-on:click="giveUp">Yes!</button>
         </div>
     </section>
 
-    <section class="row controls" v-if="alert">
+    <section class="row controls" v-if="gameOver && monsterHitPoints <= 0">
             <div>
                 You Win! Would you like to battle another monster?
                 <button v-on:click="playAgain">Yes!</button>

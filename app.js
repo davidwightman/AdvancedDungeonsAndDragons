@@ -54,6 +54,7 @@ new Vue({
             this.points = 0
         },
         playAgain: function () {
+            this.playingGame = true
             this.gameOver = false;
             this.alert = false;
             this.monsterHitPoints = undefined;
@@ -74,7 +75,15 @@ new Vue({
                 return
             }
             let message = {}
-            let youInjured = getRandomInt(10);
+            let youInjured;
+            if (this.monsterType === 'Orc'){
+                youInjured = getRandomInt(10);
+            } else if (this.monsterType === 'Troll') {
+                youInjured = getRandomInt(20);
+            } else {
+                youInjured = getRandomInt(50);
+            }
+            
             let monsterInjured = getRandomInt(20);
             this.you = this.you - youInjured;
             this.monsterHitPoints = this.monsterHitPoints - monsterInjured;
@@ -107,6 +116,7 @@ new Vue({
                 monster: `${this.characterClass} hits ${this.monsterType} for ${monsterInjured} hit points of damage.`, 
                 you: `${this.monsterType} hits ${this.characterClass} for ${youInjured} hit points of damage.`
             })
+            this.points = this.points + (monsterInjured * 10)
         },
         heal: function(event){
             let healed;
@@ -127,6 +137,9 @@ new Vue({
                 monster: ``, 
                 you: healMessage
             })
+            if (this.characterClass === 'Paladin') {
+                this.points = this.points - Math.floor(healed * 2)
+            } else  this.points = this.points - Math.floor(healed * 6)
         },
         flashHitPoints: function () {
             this.monsterBackgroundColor = 'red'
@@ -140,12 +153,16 @@ new Vue({
             if (this.you < 1){
                 this.you = 0
                 this.gameOver = true
+
+               
             }
         },
         monsterHitPoints: function(){
             if (this.monsterHitPoints < 1){
                 this.monsterHitPoints = 0
                 this.alert = true
+                this.gameOver = true
+                
             }
         }
     },
