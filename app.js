@@ -24,11 +24,13 @@ new Vue({
         monsterBackgroundColor: 'green', //'#eee',
         gameOver: false,
         alert: false,
-        points: 0
+        points: 0,
+        name: '',
+        selectName: false
     },
     methods: {
         startGame: function(event){
-            this.playingGame = !this.playingGame;
+            //this.playingGame = !this.playingGame;
             if (event === 'Paladin') {
                 this.characterClass = 'Paladin'
                 this.characterImage = 'paladin.jpg'
@@ -41,6 +43,7 @@ new Vue({
             this.monsterImage = this.monsterTypes[monsterSelector].image
             this.monsterHitPoints = this.monsterTypes[monsterSelector].hitPoints
             this.monsterDivideHitPoints = this.monsterTypes[monsterSelector].divideBy
+            this.selectName = true
         },
         giveUp: function(event){
             this.gameOver = false;

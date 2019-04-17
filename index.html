@@ -8,18 +8,18 @@
 </head>
 <body>
 <div id="app">
-        <section class="row controls" v-if="characterClass !== ''">
+        <section class="row controls" v-if="playingGame">
                 <div class="small-12 columns">
                    {{characterClass}} Points: {{ points}}
                 </div>
             </section>
     <section class="row">
         <div class="small-6 columns">
-            <h1 v-if="characterClass !== ''" class="text-center controls">{{characterClass}}</h1>
+            <h1 v-if="playingGame" class="text-center controls">{{characterClass}}</h1>
             <div class="imageContainer">
-                <img class="image" v-if="characterImage !== ''" v-bind:src="'./assets/player/' + characterImage" :alt="characterClass"/>
+                <img class="image" v-if="playingGame" v-bind:src="'./assets/player/' + characterImage" :alt="characterClass"/>
             </div>
-            <div v-if="characterImage !== ''" class="healthbar" >
+            <div v-if="playingGame" class="healthbar" >
                 <div class="healthbar text-center" style="background-color: green; margin: 0; color: white;"
                 :style="{ width: you + '%' }">
                     {{ you }}
@@ -27,11 +27,11 @@
             </div>
         </div>
         <div class="small-6 columns">
-            <h1 v-if="monsterType !== ''" class="text-center controls">{{monsterType}}</h1>
+            <h1 v-if="playingGame" class="text-center controls">{{monsterType}}</h1>
             <div class="imageContainer">
-                <img class="image" v-if="monsterImage !== ''" v-bind:src="'./assets/monster/' + monsterImage" :alt="monsterType"/>
+                <img class="image" v-if="playingGame" v-bind:src="'./assets/monster/' + monsterImage" :alt="monsterType"/>
             </div>
-            <div v-if="monsterType !== ''" class="healthbar" style="background-color: #eee;">
+            <div v-if="playingGame" class="healthbar" style="background-color: #eee;">
                 <div class="healthbar text-center" 
                 :style="{ width: monsterHitPoints / monsterDivideHitPoints + '%', backgroundColor: computedBackgroundColor, margin: 0, color: 'white' }">
                     {{ monsterHitPoints }}
@@ -47,6 +47,16 @@
             <button id="start-game" @click="startGame('Warrior')">START NEW GAME AS WARRIOR</button>
         </div>
     </section>
+
+    <section class="row controls" v-if="selectName">
+            <div class="small-12 columns">
+                Select a name:
+            </div>
+            <div class="small-12 columns">
+                <input v-model="name" />
+                <button id="start-game" @click="startGame('Warrior')">Select Name</button>
+            </div>
+        </section>
     
     <section class="row controls" v-if="playingGame && !gameOver">
         <div class="small-12 columns">
