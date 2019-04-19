@@ -38,12 +38,18 @@ new Vue({
                 this.characterClass = 'Warrior'
                 this.characterImage = 'warrior.jpg'
             }
+            this.selectName = true
+        },
+        afterName: function(){
+            this.name = this.name
             let monsterSelector = getRandomInt(6)
             this.monsterType = this.monsterTypes[monsterSelector].name
             this.monsterImage = this.monsterTypes[monsterSelector].image
             this.monsterHitPoints = this.monsterTypes[monsterSelector].hitPoints
             this.monsterDivideHitPoints = this.monsterTypes[monsterSelector].divideBy
-            this.selectName = true
+            this.selectName = false
+            this.gameOver = false
+            this.playingGame = true
         },
         giveUp: function(event){
             this.gameOver = false;

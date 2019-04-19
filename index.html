@@ -15,7 +15,7 @@
             </section>
     <section class="row">
         <div class="small-6 columns">
-            <h1 v-if="playingGame" class="text-center controls">{{characterClass}}</h1>
+            <h1 v-if="playingGame" class="text-center controls">{{name}} the {{characterClass}}</h1>
             <div class="imageContainer">
                 <img class="image" v-if="playingGame" v-bind:src="'./assets/player/' + characterImage" :alt="characterClass"/>
             </div>
@@ -54,7 +54,7 @@
             </div>
             <div class="small-12 columns">
                 <input v-model="name" />
-                <button id="start-game" @click="startGame('Warrior')">Select Name</button>
+                <button id="start-game" @click="afterName()">Select Name</button>
             </div>
         </section>
     
