@@ -26,7 +26,8 @@ new Vue({
         alert: false,
         points: 0,
         name: '',
-        selectName: false
+        selectName: false,
+        highScores: []
     },
     methods: {
         startGame: function(event){
@@ -185,6 +186,7 @@ new Vue({
             if (this.you < 1){
                 this.you = 0
                 this.gameOver = true
+                this.highScores.push({name: this.name, points: this.points})
             }
         },
         monsterHitPoints: function(){
