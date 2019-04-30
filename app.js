@@ -25,6 +25,7 @@ new Vue({
         gameOver: false,
         alert: false,
         points: 0,
+        monsterPoints: 0,
         name: '',
         selectName: false,
         highScores: []
@@ -112,6 +113,7 @@ new Vue({
                 you: message.you
             })
             this.points = this.points + (monsterInjured * 10)
+            this.monsterPoints = this.monsterPoints + (youInjured * 10)
             this.flashHitPoints()
         },
         specialAttack: function(event){
@@ -150,6 +152,7 @@ new Vue({
                 you: `${this.monsterType} hits ${this.characterClass} for ${youInjured} hit points of damage.`
             })
             this.points = this.points + (monsterInjured * 10)
+            this.monsterPoints = this.monsterPoints + (monsterPoints * 10)
         },
         heal: function(event){
             let healed;
