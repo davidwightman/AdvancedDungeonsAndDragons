@@ -65,6 +65,7 @@ new Vue({
             this.monsterImage= ''
             this.monsterType=''
             this.points = 0
+            this.name = ''
         },
         playAgain: function () {
             this.playingGame = true
@@ -114,7 +115,9 @@ new Vue({
             })
             this.points = this.points + (monsterInjured * 10)
             this.monsterPoints = this.monsterPoints + (youInjured * 10)
-            this.flashHitPoints()
+            if (monsterInjured){
+                this.flashHitPoints()
+            }
         },
         specialAttack: function(event){
             if (this.monsterHitPoints === 0) {
@@ -152,7 +155,11 @@ new Vue({
                 you: `${this.monsterType} hits ${this.characterClass} for ${youInjured} hit points of damage.`
             })
             this.points = this.points + (monsterInjured * 10)
-            this.monsterPoints = this.monsterPoints + (monsterPoints * 10)
+            this.monsterPoints = this.monsterPoints + (this.monsterPoints * 10)
+            // ?
+            if (monsterInjured){
+                this.flashHitPoints()
+            }
         },
         heal: function(event){
             let healed;
@@ -180,8 +187,7 @@ new Vue({
         flashHitPoints: function () {
             this.monsterBackgroundColor = 'red'
             let vm = this
-            setTimeout(vm.monsterBackgroundColor = 'green', 2000)
-            //this.monsterBackgroundColor = 'green'
+            setTimeout(() => {vm.monsterBackgroundColor = 'green'}, 250)
           }
     },
     watch: {
