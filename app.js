@@ -54,6 +54,14 @@ new Vue({
             this.playingGame = true
         },
         giveUp: function(event){
+            this.highScores.push({name: this.name, points: this.points})
+
+            function sortScores(a, b) {
+                return a.points > b.points ? 1 : b.points > a.points ? -1 : 0;
+              }
+
+            this.highScores = this.highScores.sort(sortScores).reverse();
+
             this.gameOver = false;
             this.alert = false;
             this.you = 100;
@@ -66,6 +74,7 @@ new Vue({
             this.monsterType=''
             this.points = 0
             this.name = ''
+            
         },
         playAgain: function () {
             this.playingGame = true
@@ -195,7 +204,7 @@ new Vue({
             if (this.you < 1){
                 this.you = 0
                 this.gameOver = true
-                this.highScores.push({name: this.name, points: this.points})
+                
             }
         },
         monsterHitPoints: function(){

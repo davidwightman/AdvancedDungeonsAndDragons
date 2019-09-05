@@ -40,14 +40,12 @@
         </div>
     </section>
 
-    <section class="row controls" v-if="!playingGame">
+    <section class="row controls" v-if="!playingGame && highScores.length">
             <div class="small-12 columns">
-               High Scores
-               <ul>
-                    <li v-for="item in highScores">
+               <div id="high-scores">High Scores</div>
+                    <div v-for="item in highScores">
                             {{ item.name }} : {{item.points}}
-                          </li>
-               </ul>
+                    </div>  
             </div>
         </section>
     <section class="row controls" v-if="!playingGame">

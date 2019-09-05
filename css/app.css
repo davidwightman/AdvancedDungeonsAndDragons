@@ -119,3 +119,10 @@ body {
     background-position: 50% 0%;
 }
 
+ul {
+    list-style-type: none;
+}
+
+#high-scores {
+    font-size: 22px;
+}
